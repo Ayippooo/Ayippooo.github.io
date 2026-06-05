@@ -1,17 +1,14 @@
 :root {
-    /* Color Palette */
     --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    --sidebar-bg: #0f172a; /* Deep Slate */
+    --sidebar-bg: #0f172a; 
     --sidebar-text: #94a3b8;
     --text-main: #1e293b;
     --text-light: #475569;
     
-    /* Accents */
-    --accent: #6366f1; /* Vibrant Indigo */
+    --accent: #6366f1; 
     --accent-hover: #4f46e5;
-    --accent-secondary: #ec4899; /* Vibrant Pink */
+    --accent-secondary: #ec4899; 
     
-    /* Glassmorphism Cards */
     --card-bg: rgba(255, 255, 255, 0.7);
     --border: rgba(255, 255, 255, 0.5);
 }
@@ -20,7 +17,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Prevents long text/links from stretching the screen */
     overflow-wrap: break-word; 
     word-wrap: break-word;
 }
@@ -36,7 +32,6 @@ body {
     animation: fadeIn 0.6s ease forwards;
 }
 
-/* Decorative Background Mesh */
 body::before {
     content: '';
     position: fixed;
@@ -52,7 +47,6 @@ h1, h2, h3, .logo {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Page Transitions */
 body.page-exit {
     animation: fadeOut 0.4s forwards;
 }
@@ -67,7 +61,6 @@ body.page-exit {
     to { opacity: 0; transform: translateY(-15px); }
 }
 
-/* Sidebar Navigation */
 .sidebar {
     width: 280px;
     height: 100vh;
@@ -132,7 +125,6 @@ body.page-exit {
     display: none;
 }
 
-/* Main Content Area */
 .content {
     margin-left: 280px;
     width: calc(100% - 280px);
@@ -150,7 +142,6 @@ body.page-exit {
     letter-spacing: -1px;
 }
 
-/* Grids & Cards */
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -213,7 +204,6 @@ body.page-exit {
     line-height: 1.7;
 }
 
-/* Tags */
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -232,7 +222,6 @@ body.page-exit {
     border: 1px solid var(--border);
 }
 
-/* Buttons */
 .btn-primary {
     display: inline-flex;
     justify-content: center;
@@ -254,10 +243,8 @@ body.page-exit {
     box-shadow: 0 15px 25px rgba(99, 102, 241, 0.4);
 }
 
-/* Work Portfolio Grid */
 .work-grid {
     display: grid;
-    /* Safely handles smaller screens by allowing columns to resize */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
 }
@@ -323,7 +310,6 @@ body.page-exit {
     transform: translateY(0);
 }
 
-/* Modals */
 .modal {
     display: none;
     position: fixed;
@@ -342,14 +328,13 @@ body.page-exit {
     border-radius: 24px;
     width: 100%;
     max-width: 650px;
-    max-height: 90vh; /* Prevents modal from overflowing screen vertically */
-    overflow-y: auto; /* Allows scrolling inside modal if content is long */
+    max-height: 90vh; 
+    overflow-y: auto; 
     position: relative;
     box-shadow: 0 25px 50px rgba(0,0,0,0.25);
     animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Custom Modal Scrollbar */
 .modal-content::-webkit-scrollbar { width: 6px; }
 .modal-content::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
@@ -388,7 +373,6 @@ body.page-exit {
 #modal-tech { color: var(--accent); margin-bottom: 1.5rem; font-weight: 700; letter-spacing: 1px; }
 #modal-desc { line-height: 1.8; color: var(--text-light); }
 
-/* Forms */
 .input-group {
     margin-bottom: 1.5rem;
     display: flex;
@@ -432,7 +416,6 @@ body.page-exit {
     transform: translateY(0);
 }
 
-/* --- Hero Section Layout & Image Styling --- */
 .hero-layout {
     display: flex;
     align-items: center;
@@ -476,7 +459,6 @@ body.page-exit {
     position: relative;
 }
 
-/* Organic Morphing Placeholder */
 .profile-placeholder {
     width: 100%;
     max-width: 380px;
@@ -525,9 +507,6 @@ body.page-exit {
     100% { transform: scale(1.1); opacity: 0.3; }
 }
 
-/* =========================================================
-   PERFECT MOBILE RESPONSIVENESS
-========================================================= */
 @media (max-width: 1000px) {
     body { flex-direction: column; }
     
@@ -549,12 +528,11 @@ body.page-exit {
     .content {
         margin-left: 0;
         width: 100%;
-        padding: 100px 1.5rem 3rem; /* Accounts for 80px sticky header */
+        padding: 100px 1.5rem 3rem;
     }
 
-    /* --- Hero Layout Fixes --- */
     .hero-layout {
-        flex-direction: column-reverse; /* Profile pic on top */
+        flex-direction: column-reverse;
         text-align: center;
         gap: 2rem;
         margin-top: 1rem;
@@ -581,10 +559,9 @@ body.page-exit {
     }
 
     .profile-placeholder {
-        max-width: 250px; /* Scales down image properly */
+        max-width: 250px; 
     }
 
-    /* --- Hamburger Animation --- */
     .hamburger {
         display: flex;
         flex-direction: column;
@@ -610,7 +587,6 @@ body.page-exit {
     .hamburger span.hide { opacity: 0; }
     .hamburger span.rotate-up { transform: rotate(-45deg); }
 
-    /* --- Mobile Menu --- */
     .nav-links {
         position: fixed;
         top: 80px;
@@ -637,9 +613,8 @@ body.page-exit {
     .nav-links a.active::before { display: none; }
     .nav-links a:hover, .nav-links a.active { transform: translateX(0); color: var(--accent); }
 
-    /* --- Grid Adjustments --- */
     .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
-    .work-grid { grid-template-columns: 1fr; gap: 1.5rem; } /* Forces 1 column on small phones */
+    .work-grid { grid-template-columns: 1fr; gap: 1.5rem; } 
     
     .page-title { 
         font-size: 2.2rem; 
@@ -647,9 +622,8 @@ body.page-exit {
         margin-bottom: 2rem; 
     }
     
-    .card { padding: 1.5rem; } /* Less padding to save screen space */
+    .card { padding: 1.5rem; } 
 
-    /* --- Modal Adjustments --- */
     .modal { padding: 15px; }
     .modal-content { 
         padding: 1.5rem; 
