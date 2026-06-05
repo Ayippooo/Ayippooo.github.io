@@ -6,6 +6,80 @@
     <title>Work | Arieff</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Forces the 2x2 Grid on desktop */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        /* Video Preview Styling */
+        .work-thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .work-item:hover .work-thumb video {
+            transform: scale(1.05);
+        }
+
+        /* CSS-only Image Slideshow for the Website Preview */
+        .preview-slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #cbd5e1;
+        }
+        .preview-slideshow img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: slideFade 9s infinite;
+            transition: transform 0.6s ease;
+        }
+        .work-item:hover .preview-slideshow img {
+            transform: scale(1.05);
+        }
+        /* Stagger the animations for 3 images */
+        .preview-slideshow img:nth-child(1) { animation-delay: 0s; }
+        .preview-slideshow img:nth-child(2) { animation-delay: 3s; }
+        .preview-slideshow img:nth-child(3) { animation-delay: 6s; }
+
+        @keyframes slideFade {
+            0%, 28% { opacity: 1; z-index: 2; }
+            33%, 95% { opacity: 0; z-index: 1; }
+            100% { opacity: 1; z-index: 2; }
+        }
+
+        /* Custom scrollbar for the modal image gallery */
+        .modal-gallery {
+            max-height: 50vh;
+            overflow-y: auto;
+            padding-right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 12px;
+        }
+        .modal-gallery::-webkit-scrollbar { width: 8px; }
+        .modal-gallery::-webkit-scrollbar-track { background: var(--bg-gradient); border-radius: 10px; }
+        .modal-gallery::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        .modal-gallery img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 900px) {
+            .work-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
@@ -29,22 +103,71 @@
             <h1 class="page-title">Selected Projects.</h1>
             <div class="work-grid">
                 
-                <a href="#" class="work-item" data-title="E-Commerce Platform" data-tech="React / Node.js" data-desc="A full-stack e-commerce solution featuring secure authentication, payment gateway integration, and a dynamic shopping cart.">
+                <!-- Project 1: Bite's Burger -->
+                <a href="#" class="work-item" 
+                   data-title="Bite's Burger Inventory System" 
+                   data-tech="System Architecture / Database" 
+                   data-desc="A well-organized and systematic platform developed as a workshop project. The inventory system features robust data management, an intuitive interface for tracking stock, and reliable back-end architecture to ensure smooth daily operations."
+                   data-type="gallery"
+                   data-media="images/burger-shot1.jpg,images/burger-shot2.jpg,images/burger-shot3.jpg">
                     <div class="work-thumb">
-                        <div class="thumb-placeholder">Project 1</div>
+                        <video autoplay loop muted playsinline src="images/burger-preview.mp4"></video>
                         <div class="work-overlay">
-                            <h3>E-Commerce Platform</h3>
-                            <p>React / Node.js</p>
+                            <h3>Bite's Burger System</h3>
+                            <p>System Architecture / Database</p>
                         </div>
                     </div>
                 </a>
 
-                <a href="#" class="work-item" data-title="Portfolio Redesign" data-tech="HTML / CSS / JS" data-desc="A sleek, minimalist portfolio template designed for creative professionals.">
+                <!-- Project 2: Blender -->
+                <a href="#" class="work-item" 
+                   data-title="Commercial Motion Graphics" 
+                   data-tech="Blender / Adobe After Effects" 
+                   data-desc="A commercial motion graphics final project featuring a high-energy collaboration between Red Bull and Demon Slayer's Zenitsu. Designed using advanced 3D rendering techniques, custom lighting setups, and dynamic track matte effects."
+                   data-type="video"
+                   data-media="images/blender-final.mp4">
                     <div class="work-thumb">
-                        <div class="thumb-placeholder">Project 2</div>
+                        <video autoplay loop muted playsinline src="images/blender-preview.mp4"></video>
                         <div class="work-overlay">
-                            <h3>Portfolio Redesign</h3>
+                            <h3>Zenitsu x Red Bull</h3>
+                            <p>Blender / After Effects</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3: Website -->
+                <a href="#" class="work-item" 
+                   data-title="Personal Portfolio Website" 
+                   data-tech="HTML / CSS / JavaScript" 
+                   data-desc="A fully responsive, dual-tone glassmorphism portfolio designed for creative professionals. Features interactive UI elements, scroll animations, dynamic image galleries, and an optimized layout architecture for both mobile and desktop environments."
+                   data-type="gallery"
+                   data-media="images/web-shot1.jpg,images/web-shot2.jpg,images/web-shot3.jpg">
+                    <div class="work-thumb">
+                        <!-- Slideshow Preview -->
+                        <div class="preview-slideshow">
+                            <img src="images/web-preview1.jpg" alt="Website Preview 1">
+                            <img src="images/web-preview2.jpg" alt="Website Preview 2">
+                            <img src="images/web-preview3.jpg" alt="Website Preview 3">
+                        </div>
+                        <div class="work-overlay">
+                            <h3>Portfolio UI/UX</h3>
                             <p>HTML / CSS / JS</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4: Hantu Teh O -->
+                <a href="#" class="work-item" 
+                   data-title="Hantu Teh O" 
+                   data-tech="2D Side-scroller / Game Design" 
+                   data-desc="A 2D side-scrolling platformer focusing on custom level design and fluid entity mechanics. Features custom flat vector art assets, including localized shoplots and pavement backgrounds, alongside carefully calibrated camera tracking systems."
+                   data-type="video"
+                   data-media="images/hantu-final.mp4">
+                    <div class="work-thumb">
+                        <video autoplay loop muted playsinline src="images/hantu-preview.mp4"></video>
+                        <div class="work-overlay">
+                            <h3>Hantu Teh O</h3>
+                            <p>2D Side-scroller / Level Design</p>
                         </div>
                     </div>
                 </a>
@@ -57,13 +180,77 @@
     <div id="project-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <div class="modal-visual card">Visual Placeholder</div>
+            
+            <!-- Dynamic Visual Container (Injected by JS below) -->
+            <div id="modal-visual" style="margin-bottom: 2rem;"></div>
+            
             <h2 id="modal-title">Project Title</h2>
             <h4 id="modal-tech">Tech Stack</h4>
             <p id="modal-desc">Description goes here...</p>
         </div>
     </div>
 
+    <!-- Base Script for Sidebar/Animations -->
     <script src="script.js"></script>
+
+    <!-- Custom Modal Logic for Gallery vs Video -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('project-modal');
+            const visualContainer = document.getElementById('modal-visual');
+            const modalTitle = document.getElementById('modal-title');
+            const modalTech = document.getElementById('modal-tech');
+            const modalDesc = document.getElementById('modal-desc');
+            const closeBtn = document.querySelector('.close-btn');
+
+            document.querySelectorAll('.work-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    
+                    // Set Text Data
+                    modalTitle.innerText = this.getAttribute('data-title');
+                    modalTech.innerText = this.getAttribute('data-tech');
+                    modalDesc.innerText = this.getAttribute('data-desc');
+
+                    // Handle Dynamic Media (Video vs Gallery)
+                    const mediaType = this.getAttribute('data-type');
+                    const mediaFiles = this.getAttribute('data-media');
+                    visualContainer.innerHTML = ''; // Clear previous
+
+                    if (mediaType === 'video') {
+                        // Inject Video Player
+                        visualContainer.innerHTML = `
+                            <div class="modal-visual card" style="padding:0; overflow:hidden; border:none;">
+                                <video src="${mediaFiles}" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover;"></video>
+                            </div>
+                        `;
+                    } else if (mediaType === 'gallery') {
+                        // Inject Scrollable Image Gallery
+                        const images = mediaFiles.split(',');
+                        let imgTags = images.map(src => `<img src="${src}" alt="Project Screenshot">`).join('');
+                        visualContainer.innerHTML = `
+                            <div class="modal-gallery">
+                                ${imgTags}
+                            </div>
+                        `;
+                    }
+
+                    // Show Modal
+                    modal.style.display = 'flex'; 
+                });
+            });
+
+            // Close Logic
+            const closeModal = () => {
+                modal.style.display = 'none';
+                visualContainer.innerHTML = ''; // Stop video playback when closed
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        });
+    </script>
 </body>
 </html>
