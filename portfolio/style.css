@@ -20,6 +20,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Prevents long text/links from stretching the screen */
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
 }
 
 body {
@@ -231,7 +234,9 @@ body.page-exit {
 
 /* Buttons */
 .btn-primary {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(45deg, var(--accent), var(--accent-hover));
     color: #fff;
     padding: 1rem 2.5rem;
@@ -252,7 +257,8 @@ body.page-exit {
 /* Work Portfolio Grid */
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* Safely handles smaller screens by allowing columns to resize */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
 }
 
@@ -336,10 +342,16 @@ body.page-exit {
     border-radius: 24px;
     width: 100%;
     max-width: 650px;
+    max-height: 90vh; /* Prevents modal from overflowing screen vertically */
+    overflow-y: auto; /* Allows scrolling inside modal if content is long */
     position: relative;
     box-shadow: 0 25px 50px rgba(0,0,0,0.25);
     animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Custom Modal Scrollbar */
+.modal-content::-webkit-scrollbar { width: 6px; }
+.modal-content::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(40px) scale(0.95); }
@@ -354,6 +366,7 @@ body.page-exit {
     cursor: pointer;
     color: #94a3b8;
     transition: color 0.3s;
+    z-index: 10;
 }
 
 .close-btn:hover { color: var(--accent-secondary); }
@@ -399,6 +412,7 @@ body.page-exit {
     outline: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.02);
     transition: all 0.3s ease;
+    resize: vertical;
 }
 
 .input-group input:focus, .input-group textarea:focus {
@@ -433,7 +447,7 @@ body.page-exit {
 }
 
 .hero-text h1 {
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(2.5rem, 5vw, 5rem);
     color: var(--text-main);
     line-height: 1.1;
     letter-spacing: -2px;
@@ -441,7 +455,7 @@ body.page-exit {
 }
 
 .hero-text h2 {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
     color: var(--accent);
     margin-bottom: 1.5rem;
 }
@@ -469,24 +483,22 @@ body.page-exit {
     aspect-ratio: 1/1;
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-    padding: 8px; /* Creates the gradient border thickness */
+    padding: 8px;
     box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
     animation: morph 8s ease-in-out infinite;
     position: relative;
     z-index: 2;
 }
 
-/* The actual image */
 .profile-placeholder img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: inherit; /* Inherits the morphing shape */
-    background-color: var(--sidebar-bg); /* Fallback color */
-    border: 5px solid #ffffff; /* Inner white border for contrast */
+    border-radius: inherit;
+    background-color: var(--sidebar-bg);
+    border: 5px solid #ffffff;
 }
 
-/* Decorative background blur behind the image */
 .hero-image-container::before {
     content: '';
     position: absolute;
@@ -513,7 +525,9 @@ body.page-exit {
     100% { transform: scale(1.1); opacity: 0.3; }
 }
 
-/* Perfect Mobile Responsiveness */
+/* =========================================================
+   PERFECT MOBILE RESPONSIVENESS
+========================================================= */
 @media (max-width: 1000px) {
     body { flex-direction: column; }
     
@@ -523,22 +537,54 @@ body.page-exit {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 0 2rem;
+        padding: 0 1.5rem;
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
     
     .logo { 
         margin-bottom: 0; 
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .content {
         margin-left: 0;
         width: 100%;
-        padding: 110px 1.5rem 3rem; /* Accounts for 80px sticky header */
+        padding: 100px 1.5rem 3rem; /* Accounts for 80px sticky header */
     }
 
-    /* Animated Hamburger Icon */
+    /* --- Hero Layout Fixes --- */
+    .hero-layout {
+        flex-direction: column-reverse; /* Profile pic on top */
+        text-align: center;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .hero-text h1 { 
+        font-size: clamp(2rem, 8vw, 3rem); 
+        margin-bottom: 10px;
+    }
+    
+    .hero-text h2 { 
+        font-size: clamp(1.2rem, 5vw, 1.5rem); 
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0 auto 2.5rem auto;
+    }
+
+    .hero-actions {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-placeholder {
+        max-width: 250px; /* Scales down image properly */
+    }
+
+    /* --- Hamburger Animation --- */
     .hamburger {
         display: flex;
         flex-direction: column;
@@ -554,17 +600,17 @@ body.page-exit {
         display: block;
         width: 100%;
         height: 3px;
-        background: #ffffff; /* White bars to pop on dark header */
+        background: #ffffff;
         border-radius: 3px;
         transition: all 0.3s ease-in-out;
         transform-origin: left center;
     }
 
-    /* Transform classes injected by your script.js */
     .hamburger span.rotate-down { transform: rotate(45deg); }
     .hamburger span.hide { opacity: 0; }
     .hamburger span.rotate-up { transform: rotate(-45deg); }
 
+    /* --- Mobile Menu --- */
     .nav-links {
         position: fixed;
         top: 80px;
@@ -584,16 +630,36 @@ body.page-exit {
     .nav-links.nav-active {
         max-height: 500px;
         opacity: 1;
-        padding: 2rem 0;
+        padding: 1.5rem 0;
         box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
     .nav-links a.active::before { display: none; }
     .nav-links a:hover, .nav-links a.active { transform: translateX(0); color: var(--accent); }
 
+    /* --- Grid Adjustments --- */
     .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+    .work-grid { grid-template-columns: 1fr; gap: 1.5rem; } /* Forces 1 column on small phones */
     
-    .page-title { font-size: 2.5rem; text-align: center; }
-    .card { padding: 1.8rem; }
-    .modal-content { padding: 2rem; }
+    .page-title { 
+        font-size: 2.2rem; 
+        text-align: center; 
+        margin-bottom: 2rem; 
+    }
+    
+    .card { padding: 1.5rem; } /* Less padding to save screen space */
+
+    /* --- Modal Adjustments --- */
+    .modal { padding: 15px; }
+    .modal-content { 
+        padding: 1.5rem; 
+        border-radius: 16px; 
+    }
+    .close-btn { 
+        top: 15px; 
+        right: 15px; 
+        font-size: 2rem; 
+    }
+    #modal-title { font-size: 1.5rem; }
+    #modal-desc { font-size: 0.95rem; line-height: 1.6; }
 }
